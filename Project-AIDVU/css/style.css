@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+html , body {
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+
+.intro{
+	height:100%;
+	width:100%;
+	margin:auto;
+	/*background: url("https://static.pexels.com/photos/66090/pexels-photo-66090.jpeg") no-repeat 50% 50%;*/	
+	background: url(../hiv.jpg) no-repeat center center fixed;
+	display: table;
+	top: 0;
+	background-size: cover;
+}
+
+.intro .inner {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+	max-width: none;
+}
+
+.content {
+	/*max-width: 500px;*/
+	margin: 0 auto;
+	text-align:center;
+}
+
+.content h1{
+	font-family: 'Raleway', sans-serif;
+	color: #f9e3f4;
+	text-shadow: 300px 300px 300px #000;
+	font-size:600%;
+}
+
+h1 {
+	font-family: 'Raleway', sans-serif;
+	color: #f9e3f4;
+	text-shadow: 300px 300px 300px #000;
+	font-size:200%;
+	/*margin: auto;*/
+	text-align:center;
+}
+
+.btn {
+	border-radius: 9px;
+	font-family: 'Oswald', sans-serif;
+	color: #B5D3F5;
+	font-size: 250%;
+	padding: 20px 20px;
+	border: solid #B5D3F5 5px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.btn:hover {
+	color: #fff;
+	border: solid #fff 8px;
+}
+
+.btn1 {
+	border-radius: 8px;
+	font-family: 'Oswald', sans-serif;
+	color: #B5D3F5;
+	font-size: 100%;
+	padding: 5px 5px;
+	border: solid #B5D3F5 3px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.btn1:hover {
+	color: #fff;
+	border: solid #fff 7px;
+}
+
+.btn2 {
+	border-radius: 8px;
+	font-family: 'Oswald', sans-serif;
+	color: #4A38E6;
+	font-size: 100%;
+	padding: 5px 5px;
+	border: solid #4A38E6 3px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.btn2:hover {
+	color: #fff;
+	border: solid #fff 7px;
+}
+
+p {
+	font-family: garamond;
+	font-size: 150%;
+	color: #f9e3f4;
+}
+
+strong {
+	font-family: garamond;
+	font-size: 175%;
+	color: #EBB768;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.strong1 {
+	font-family: garamond;
+	color: #DC971F;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 768px){
+	.content h1 {
+		font-size: 250%;
+	}
+	.btn {
+		font-size: 110%;
+		padding: 5px 10px;
+	}
+	p {
+		font-size: 100%;
+		line-height: 160%;
+	}
+	strong {
+		font-size: 100%;
+		line-height: 175%;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 10% 20% auto auto;
+	grid-template-areas:
+	"title"
+	"header"
+	"Year"
+	"State";
+	
+	/*grid-auto-rows: auto;*/
+}
+
+.title {
+	grid-area: title;
+}
+
+.header {
+	grid-area: header;
+}
+
+
+.Year {
+	grid-area: Year;
+	background-color: #B5F2E6;
+}
+
+.State {
+	grid-area: State;
+	background-color: #B5E0F2;
+}
+
+/*.grid div:nth-child(even){
+	background-color: red;
+}*/
+
+/*.grid div:nth-child(odd){
+	background-color: green;
+}*/
+
+.title{
+	background: url(../hiv.jpg) no-repeat center center fixed;
+	display: table;
+	top: 0;
+	background-size: cover;
+}
+
+.header{
+	background: url(../hiv.jpg) no-repeat center center fixed;
+	display: table;
+	top: 0;
+	background-size: cover;
+}
+
+.footer{
+	background: url(../hiv.jpg) no-repeat center center fixed;
+	display: table;
+	top: 0;
+	background-size: cover;
+}
