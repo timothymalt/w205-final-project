@@ -12,7 +12,7 @@ html , body {
 	height:100%;
 	width:100%;
 	margin:auto;
-	/*background: url("https://static.pexels.com/photos/66090/pexels-photo-66090.jpeg") no-repeat 50% 50%;*/	
+	/*background: url("https://static.pexels.com/photos/66090/pexels-photo-66090.jpeg") no-repeat 50% 50%;*/
 	background: url(../hiv.jpg) no-repeat center center fixed;
 	display: table;
 	top: 0;
@@ -144,18 +144,9 @@ strong {
 	"header"
 	"Year"
 	"State";
-	
+
 	/*grid-auto-rows: auto;*/
 }
-
-.title {
-	grid-area: title;
-}
-
-.header {
-	grid-area: header;
-}
-
 
 .Year {
 	grid-area: Year;
@@ -175,14 +166,17 @@ strong {
 	background-color: green;
 }*/
 
-.title{
+.title {
 	background: url(../hiv.jpg) no-repeat center center fixed;
 	display: table;
 	top: 0;
 	background-size: cover;
+	grid-area: title;
+    width: 100%;
 }
 
 .header{
+	grid-area: header;
 	background: url(../hiv.jpg) no-repeat center center fixed;
 	display: table;
 	top: 0;

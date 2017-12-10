@@ -12,7 +12,7 @@
 
 <body>
 	<div class="grid">
-		<div class="title">
+		<div class="title" width="100%">
         <h1>Race-Wise Distribution New Infection Rates<h1>
         <a class="btn1" href="../index.html">Home</a>
         <a class="btn1" href="../genderbar.html">Gender</a>
@@ -21,7 +21,7 @@
         </div>
         <div class="header">
                 <p>
-                This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Race. 
+                This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Race.
 
                 By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. Please Press the following button to activate filters.
                 </p>
@@ -33,7 +33,7 @@
                 <a class="btn1" onclick="showRate()">Rate</a>
                 <a class="btn1" onclick="showCase()">Total Cases</a>
                 <a class="btn1" onclick="show()">Both</a>
-                
+
         </div>
 		<div class="Year">
 	    <strong class="strong1">Race-wise Distribution by Year</strong>
@@ -50,7 +50,7 @@
         <a class="reset" href="javascript:raceYearChartCase.filterAll();dc.redrawAll();"style="display: none;">reset</a>
         <div class="clearfix"></div>
         </div>
-        
+
         </div>
 
         <div class="State">
@@ -112,7 +112,7 @@
 
 		<div id="RaceStateCase">
 		 <br></br>
-		
+
         <a class="btn2" onclick="showraceCase('blackCase')">Black</a>
         <a class="btn2" onclick="showraceCase('whiteCase')">White</a>
         <a class="btn2" onclick="showraceCase('asianCase')">Asian</a>
@@ -167,7 +167,7 @@
 		</div>
 
         </div>
-  
+
 </div>
 
 <script src="js/crossfilter.js"></script>
@@ -178,7 +178,7 @@
 <script>
 
 function showrace(chart) {
-    
+
     document.getElementById('black').style.display = 'none';
     document.getElementById('white').style.display = 'none';
     document.getElementById('asian').style.display = 'none';
@@ -192,13 +192,13 @@ function showrace(chart) {
     document.getElementById('americanNativeCase').style.display = 'none';
     document.getElementById('hawaiianNativeCase').style.display = 'none';
     document.getElementById('multipleRaceCase').style.display = 'none';
-    
+
     document.getElementById(chart).style.display = "block";
     dc.renderAll();
 }
 
 function showraceCase(chart) {
-    
+
     document.getElementById('white').style.display = 'none';
     document.getElementById('asian').style.display = 'none';
     document.getElementById('hispanic').style.display = 'none';
@@ -212,7 +212,7 @@ function showraceCase(chart) {
     document.getElementById('americanNativeCase').style.display = 'none';
     document.getElementById('hawaiianNativeCase').style.display = 'none';
     document.getElementById('multipleRaceCase').style.display = 'none';
-    
+
 
     document.getElementById(chart).style.display = "block";
     dc.renderAll();
@@ -286,10 +286,10 @@ if (err) throw err;
 
 // we assign an object to csv data
 var ndx = crossfilter(data);
-// used to perform aggregate functions on objects 
+// used to perform aggregate functions on objects
 var all = ndx.groupAll();
 
-// creating dimensions 
+// creating dimensions
 var StateDim = ndx.dimension(function (d){ return d["StateAbbrev"]; });
 var YearDim = ndx.dimension(function (d){ return d["Year"]; });
 
@@ -329,7 +329,7 @@ blackChart
     .xUnits(dc.units.ordinal)
     .xAxisLabel('State')
     .yAxisLabel('New Diagnoses Rates by Black');
-    
+
 
 whiteChart
     .width(1400)
@@ -337,7 +337,7 @@ whiteChart
     .margins({top:15 ,right: 20, bottom: 35, left: 60 })
     .dimension(StateDim)
     .clipPadding(20)
-    .group(whitegrp,"White") 
+    .group(whitegrp,"White")
     .ordering(function(d) { return -d.value; })
     .elasticX(true)
     .elasticY(true)
@@ -348,7 +348,7 @@ whiteChart
     .xUnits(dc.units.ordinal)
     .xAxisLabel('State')
     .yAxisLabel('New Diagnoses Rates by White');
-   
+
 
 hispanicChart
     .width(1400)
@@ -467,7 +467,7 @@ blackChartCase
     .dimension(StateDim)
     .clipPadding(20)
     .group(blackgrpcase,"Black")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(hispgrpcase,"Hispanic")
     .stack(asiangrpcase,"Asian")
     .stack(angrpcase,"American Native")
@@ -496,7 +496,7 @@ whiteChartCase
     .margins({top:15 ,right: 20, bottom: 40, left: 60 })
     .dimension(StateDim)
     .clipPadding(20)
-    .group(whitegrpcase,"White") 
+    .group(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(hispgrpcase,"Hispanic")
     .stack(asiangrpcase,"Asian")
@@ -527,7 +527,7 @@ hispanicChartCase
     .dimension(StateDim)
     .clipPadding(20)
     .group(hispgrpcase,"Hispanic")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(asiangrpcase,"Asian")
     .stack(angrpcase,"American Native")
@@ -558,7 +558,7 @@ asianChartCase
     .clipPadding(20)
     .group(asiangrpcase,"Asian")
     .stack(hispgrpcase,"Hispanic")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(angrpcase,"American Native")
     .stack(hngrpcase,"Hawaiian Native")
@@ -589,7 +589,7 @@ americanNativeChartCase
     .group(angrpcase,"American Native")
     .stack(asiangrpcase,"Asian")
     .stack(hispgrpcase,"Hispanic")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(hngrpcase,"Hawaiian Native")
     .stack(multigrpcase,"Mutiple Race")
@@ -620,7 +620,7 @@ hawaiianNativeChartCase
     .stack(angrpcase,"American Native")
     .stack(asiangrpcase,"Asian")
     .stack(hispgrpcase,"Hispanic")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(multigrpcase,"Mutiple Race")
     .ordinalColors(['#ECF751','#8D6B1D','#8D1D8D','#1D8D37','#e41a1c','#377eb8','#681D8D','#51F7F2'])
@@ -650,7 +650,7 @@ multipleRaceChartCase
     .stack(angrpcase,"American Native")
     .stack(asiangrpcase,"Asian")
     .stack(hispgrpcase,"Hispanic")
-    .stack(whitegrpcase,"White") 
+    .stack(whitegrpcase,"White")
     .stack(blackgrpcase,"Black")
     .stack(hngrpcase,"Hawaiian Native")
     .ordinalColors(['#51F7F2','#8D6B1D','#8D1D8D','#1D8D37','#e41a1c','#377eb8','#681D8D','#ECF751'])
