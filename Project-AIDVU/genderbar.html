@@ -166,7 +166,7 @@ var maleChart = dc.barChart("#male");
 var femaleChartCase = dc.barChart("#femaleCase");
 var maleChartCase = dc.barChart("#maleCase");
 
-d3.csv("AIDSvu_NewDiagnoses.csv", function (err,data){
+d3.csv("data/AIDSvu_NewDiagnoses.csv", function (err,data){
 
 //instead of using the .gz file we use .csv file which is read without any problems
 if (err) throw err;

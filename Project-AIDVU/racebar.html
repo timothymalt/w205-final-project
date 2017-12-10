@@ -12,10 +12,10 @@
 
 <body>
 	<div class="grid">
-		<div class="title" width="100%">
+		<div class="title">
         <h1>Race-Wise Distribution New Infection Rates<h1>
-        <a class="btn1" href="../index.html">Home</a>
-        <a class="btn1" href="../genderbar.html">Gender</a>
+        <a class="btn1" href="index.html">Home</a>
+        <a class="btn1" href="genderbar.html">Gender</a>
         <a class="btn1" href="agebar.html">Age</a>
         <a class="btn1" href="composite.html">Composite</a>
         </div>
@@ -276,7 +276,7 @@ var americanNativeChartCase = dc.barChart("#americanNativeCase");
 var hawaiianNativeChartCase = dc.barChart("#hawaiianNativeCase");
 var multipleRaceChartCase = dc.barChart("#multipleRaceCase");
 
-d3.csv("AIDSvu_NewDiagnoses.csv", function (err,data){
+d3.csv("data/AIDSvu_NewDiagnoses.csv", function (err,data){
 
 //instead of using the .gz file we use .csv file which is read without any problems
 if (err) throw err;
