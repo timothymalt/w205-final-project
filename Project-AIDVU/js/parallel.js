@@ -897,8 +897,9 @@ window.onresize = function() {
         .select("g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
+    // Removing the selections below, so this is not currently needed
     // get our brush selections before we change any ranges
-    var actives = active_brush_selections();
+    // var actives = active_brush_selections();
 
     xscale = d3.scaleBand().range([0, w], 1).domain(dimensions);
     dimensions.forEach(function(d) {
@@ -914,15 +915,20 @@ window.onresize = function() {
             return "translate(" + xscale(d) + ")";
         })
 
+    // clearing the brushes instead.  The following try block improves the update a bit, but
+    // the chart still becomes a bit unstable and doesn't draw.
+    clear_brushes();
     // update brush placement
-    for (var i in actives) {
-        var d = actives[i].dimension;
-        // TODO: Hack, seems to occasionally error out on a negative attribute height on every other call
-        try {
-            d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[1], actives[i].extent[0]].map(yscale[d].scale));
-        }
-        catch(e) {}
-    }
+    // for (var i in actives) {
+    //     var d = actives[i].dimension;
+    //     // TODO: Hack, seems to occasionally error out on a negative attribute height on every other call
+    //     try {
+    //          d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[1], actives[i].extent[0]].map(yscale[d].scale));
+    //     }
+    //     catch(e) {
+    //     }
+    // }
+
     brush_count++;
 
     // update axis placement
