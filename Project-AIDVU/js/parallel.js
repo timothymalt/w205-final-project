@@ -897,12 +897,15 @@ window.onresize = function() {
         .select("g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
+    // get our brush selections before we change any ranges
+    var actives = active_brush_selections();
+
     xscale = d3.scaleBand().range([0, w], 1).domain(dimensions);
     dimensions.forEach(function(d) {
-        if (yscale[d].inverted == false) {
-            yscale[d].scale.range([h, 0]);
-        } else {
+        if (yscale[d].inverted == true) {
             yscale[d].scale.range([0, h]);
+        } else {
+            yscale[d].scale.range([h, 0]);
         }
     });
 
@@ -910,16 +913,16 @@ window.onresize = function() {
         .attr("transform", function(d) {
             return "translate(" + xscale(d) + ")";
         })
+
     // update brush placement
-    d3.selectAll(".brush")
-        .each(function(d) {
-            d3.select(this).call(yscale[d].brush = d3.brushY(yscale[d].scale)
-                .extent([
-                    [-10, 0],
-                    [10, height]
-                ])
-                .on("brush", brush));
-        })
+    for (var i in actives) {
+        var d = actives[i].dimension;
+        // TODO: Hack, seems to occasionally error out on a negative attribute height on every other call
+        try {
+            d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[1], actives[i].extent[0]].map(yscale[d].scale));
+        }
+        catch(e) {}
+    }
     brush_count++;
 
     // update axis placement
