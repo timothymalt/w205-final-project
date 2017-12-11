@@ -899,7 +899,11 @@ window.onresize = function() {
 
     xscale = d3.scaleBand().range([0, w], 1).domain(dimensions);
     dimensions.forEach(function(d) {
-        yscale[d].scale.range([h, 0]);
+        if (yscale[d].inverted == false) {
+            yscale[d].scale.range([h, 0]);
+        } else {
+            yscale[d].scale.range([0, h]);
+        }
     });
 
     d3.selectAll(".dimension")
