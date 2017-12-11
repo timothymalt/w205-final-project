@@ -13,15 +13,18 @@
 <body>
 	<div class="grid">
 		<div class="title">
-        <h1>Gender-Wise Distribution New Infection Rates<h1>
-        <a class="btn1" href="../index.html">Home</a>
-        <a class="btn1" href="../racebar.html">Race</a>
-        <a class="btn1" href="agebar.html">Age</a>
-        <a class="btn1" href="composite.html">Composite</a>
+            <h1 class="header1">Gender-Wise Distribution New Infection Rates<h1>
+            <center>
+                <a class="btn1" href="index.html">Home</a>
+                <a class="btn1_grey" disabled>Gender</a>
+                <a class="btn1" href="racebar.html">Race</a>
+                <a class="btn1" href="agebar.html">Age</a>
+                <a class="btn1" href="composite.html">Composite</a>
+            </center>
         </div>
         <div class="header">
                 <p>
-                This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Gender. 
+                This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Gender.
 
                 By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. Please Press the following button to activate filters.
                 </p>
@@ -33,7 +36,7 @@
                 <a class="btn1" onclick="showRate()">Rate</a>
                 <a class="btn1" onclick="showCase()">Total Cases</a>
                 <a class="btn1" onclick="show()">Both</a>
-                
+
         </div>
 		<div class="Year">
 	    <strong class="strong1">Gender-wise Distribution by Year</strong>
@@ -49,7 +52,7 @@
        <a class="reset" href="javascript:genderYearChartCase.filterAll();dc.redrawAll();"style="display: none;">reset</a>
        <div class="clearfix"></div>
         </div>
-        
+
         </div>
 
         <div class="State">
@@ -100,7 +103,7 @@
 		</div>
 
         </div>
-  
+
 </div>
 
 <script src="js/crossfilter.js"></script>
@@ -114,7 +117,7 @@ function showgender(chart) {
     document.getElementById('female').style.display = 'none';
     document.getElementById('male').style.display = 'none';
     document.getElementById('femaleCase').style.display = 'none';
-   
+
     document.getElementById(chart).style.display = "block";
     dc.renderAll();
 }
@@ -176,10 +179,10 @@ if (err) throw err;
 
 // we assign an object to csv data
 var ndx = crossfilter(data);
-// used to perform aggregate functions on objects 
+// used to perform aggregate functions on objects
 var all = ndx.groupAll();
 
-// creating dimensions 
+// creating dimensions
 var StateDim = ndx.dimension(function (d){ return d["StateAbbrev"]; });
 var YearDim = ndx.dimension(function (d){ return d["Year"]; });
 
@@ -197,7 +200,7 @@ maleChart
     .dimension(StateDim)
     .clipPadding(10)
     .group(malegrp,"Male")
-    .ordering(function(d) { return -d.value; }) 
+    .ordering(function(d) { return -d.value; })
     .elasticY(true)
     .elasticX(true)
     .brushOn(false)
@@ -207,7 +210,7 @@ maleChart
     .yAxisLabel('New Diagnoses Rates by Male')
     .renderVerticalGridLines(true)
     .renderHorizontalGridLines(true);
-    
+
 
 femaleChart
     .width(1400)
@@ -216,7 +219,7 @@ femaleChart
     .dimension(StateDim)
     .clipPadding(10)
     .group(femalegrp,"Female")
-    .ordering(function(d) { return -d.value; }) 
+    .ordering(function(d) { return -d.value; })
     .elasticY(true)
     .elasticX(true)
     .brushOn(false)
@@ -251,7 +254,7 @@ maleChartCase
     .dimension(StateDim)
     .clipPadding(20)
     .group(malegrpcase,"Male")
-    .ordering(function(d) { return -d.value; }) 
+    .ordering(function(d) { return -d.value; })
     .stack(femalegrpcase,"Female")
     .ordinalColors(['#e41a1c','#377eb8'])
     .elasticY(true)
@@ -276,7 +279,7 @@ femaleChartCase
     .dimension(StateDim)
     .clipPadding(20)
     .group(femalegrpcase,"Female")
-    .ordering(function(d) { return -d.value; }) 
+    .ordering(function(d) { return -d.value; })
     .stack(malegrpcase,"Male")
     .ordinalColors(['#377eb8','#e41a1c'])
     .elasticY(true)

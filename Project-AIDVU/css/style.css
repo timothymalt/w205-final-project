@@ -39,11 +39,12 @@ html , body {
 	font-size:600%;
 }
 
-h1 {
+.header1 {
 	font-family: 'Raleway', sans-serif;
 	color: #f9e3f4;
 	text-shadow: 300px 300px 300px #000;
-	font-size:200%;
+	font-size: 24pt;
+    line-height: normal;
 	/*margin: auto;*/
 	text-align:center;
 }
@@ -64,12 +65,25 @@ h1 {
 	border: solid #fff 8px;
 }
 
+.btn1_grey {
+	border-radius: 8px;
+	font-family: 'Oswald', sans-serif;
+	color: #bbbbbb;
+	font-size: 20pt;
+	padding: 5px 5px;
+    line-height: normal;
+	border: solid #bbbbbb 3px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
 .btn1 {
 	border-radius: 8px;
 	font-family: 'Oswald', sans-serif;
 	color: #B5D3F5;
-	font-size: 100%;
+	font-size: 20pt;
 	padding: 5px 5px;
+    line-height: normal;
 	border: solid #B5D3F5 3px;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -167,16 +181,17 @@ strong {
 }*/
 
 .title {
+	grid-area: title;
 	background: url(../hiv.jpg) no-repeat center center fixed;
 	display: table;
+    width: 100%;
 	top: 0;
 	background-size: cover;
-	grid-area: title;
-    width: 100%;
 }
 
 .header{
 	grid-area: header;
+    width: 100%;
 	background: url(../hiv.jpg) no-repeat center center fixed;
 	display: table;
 	top: 0;
