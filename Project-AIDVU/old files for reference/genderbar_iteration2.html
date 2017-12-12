@@ -26,85 +26,24 @@
                 <p>
                 This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Gender.
 
-                By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. 
+                By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. Please Press the following button to activate filters.
                 </p>
-                <fieldset>
-                <legend class="strong1">Important Instructions</legend>
-                <p>
-                In order to activate filters and view the tables, the following button should be pressed each time the visualization is opened.
-                <br></br>
                 <a class = "btn1" onclick="showgender('male')">Activate Filter</a>
-                <br></br>
-                You could view the selected rows by clicking on the following buttons.
-                <br></br>
-                <a class="btn1" href="#popup1">Rates Table</a>
-                <a class="btn1" href="#popup2">Cases Table</a>
-                <br></br>
+
+                <p>
                 We could choose to see the trends in rates or total cases individually by selecting one of the following buttons. We could also choose to see Both Rates and Total Cases.
-                <br></br>
+                </p>
                 <a class="btn1" onclick="showRate()">Rate</a>
                 <a class="btn1" onclick="showCase()">Total Cases</a>
                 <a class="btn1" onclick="show()">Both</a>
-                </p>
-                </fieldset>
-
-        
-                <div class="dc-data-count">
-                <p>
-                <span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a
-                 href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
-                </p>
-                </div>
-                
 
         </div>
-		<div class="Year"> 
-        <center><strong class="strong1">Gender-wise Distribution by Year</strong>
-        </center>
-
-        <div id="popup1" class="overlay"> 
-            <div class="popup">
-                <h2>Table of New Diagnoses by Rates</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                    <table class='table table-hover' id='dc-table-graph1'>
-                          <thead>
-                            <tr class='strong1'>
-                            <th>State</th>
-                            <th>Year</th>
-                            <th>Rates(Males)</th>
-                            <th>Rates(Females)</th>
-                            </tr>
-                        </thead>
-                    </table>
-      
-                </div>
-            </div>
-        </div>
-
-        <div id="popup2" class="overlay"> 
-            <div class="popup">
-                <h2>Table of New Diagnoses by Cases</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                    <table class='table table-hover' id='dc-table-graph2'>
-                        <thead>
-                        <tr class='strong1'>
-                        <th>State</th>
-                        <th>Year</th>
-                        <th>Cases(Males)</th>
-                        <th>Cases(Females)</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        
-        <br></br>
-        <div id="GenderRing">
-        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+		<div class="Year">
+	    <strong class="strong1">Gender-wise Distribution by Year</strong>
+         
+	    <br></br>
+		<div id="GenderRing">
+	    <span class="reset" style="display: none;">range: <span class="filter"></span></span>
         <a class="reset" href="javascript:genderYearChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
         <div class="clearfix"></div>
     	</div>
@@ -118,7 +57,7 @@
         </div>
 
         <div class="State">
-        <center><strong class="strong1" >Gender-wise Distribution by State</strong></center>
+        <strong class="strong1" >Gender-wise Distribution by State</strong>
 
         <div id="GenderStateRate">
         <br></br>
@@ -230,9 +169,6 @@ var femaleChart = dc.barChart("#female");
 var maleChart = dc.barChart("#male");
 var femaleChartCase = dc.barChart("#femaleCase");
 var maleChartCase = dc.barChart("#maleCase");
-var visCount = dc.dataCount(".dc-data-count");
-var dataTable1 = dc.dataTable("#dc-table-graph1");
-var dataTable2 = dc.dataTable("#dc-table-graph2");
 
 d3.csv("data/AIDSvu_NewDiagnoses.csv", function (err,data){
 
@@ -257,10 +193,6 @@ var malegrpcase = StateDim.group().reduceSum(function (data) { return +data.NewD
 var femalegrpcase = StateDim.group().reduceSum(function (data) { return +data.NewDiagFemaleCase;});
 var gendergrpy = YearDim.group().reduceSum(function (data) { return (+data.NewDiagMaleRate + +data.NewDiagFemaleRate);});
 var gendergrpycase = YearDim.group().reduceSum(function (data) { return (+data.NewDiagMaleCase + +data.NewDiagFemaleCase);});
-
-visCount
-.dimension(ndx)
-.group(all);
 
 maleChart
     .width(1400)
@@ -382,39 +314,6 @@ genderYearChartCase
     .renderVerticalGridLines(true)
     .renderHorizontalGridLines(true);
 
-dataTable1
-    .width(1400)
-    .height(1000)
-    .dimension(YearDim)
-    .group(function(d) { return "List of all cases corresponding to the filters"
-     })
-    .size(500)                          
-    .columns([
-      function(d) { return d["StateAbbrev"]; },
-      function(d) { return d["Year"]; },
-      function(d) { return +d["NewDiagMaleRate"]; },
-      function(d) { return +d["NewDiagFemaleRate"]; }
-    ])
-    .sortBy(function(d){ return d["StateAbbrev"]; })
-    .order(d3.ascending);
-
-    dataTable2
-    .width(1400)
-    .height(1000)
-    .dimension(YearDim)
-    .group(function(d) { return "List of all cases corresponding to the filters"
-     })
-    .size(500)                          
-    .columns([
-      function(d) { return d["StateAbbrev"]; },
-      function(d) { return d["Year"]; },
-      function(d) { return +d["NewDiagMaleCase"]; },
-      function(d) { return +d["NewDiagFemaleCase"];}
-    ])
-    .sortBy(function(d){ return d["StateAbbrev"]; })
-    .order(d3.ascending);
-
-visCount.render();
 maleChart.render();
 genderYearChart.render();
 maleChartCase.render();

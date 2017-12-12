@@ -149,97 +149,15 @@ strong {
 	}
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 20px 20px;
-  padding: 10px;
-  background: #fff;
-  border-radius: 5px;
-  height: 70%;
-  width: auto;
-  position: relative;
-  transition: all 2s ease-in-out;
-  overflow: auto;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-  text-align: center;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 100ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 85%;
-  max-width: 100%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .popup{
-    width: 70%;
-  }
-}
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 5px;
-}
-td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 5px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
 .grid {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 10% 20% auto auto auto;
+	grid-template-rows: 10% 20% auto auto;
 	grid-template-areas:
 	"title"
 	"header"
 	"Year"
 	"State";
-
-
 
 	/*grid-auto-rows: auto;*/
 }
@@ -253,7 +171,6 @@ tr:nth-child(even) {
 	grid-area: State;
 	background-color: #B5E0F2;
 }
-
 
 /*.grid div:nth-child(even){
 	background-color: red;
