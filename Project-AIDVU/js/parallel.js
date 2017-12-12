@@ -3,8 +3,8 @@
 //
 // This version of the code has been altered from Kai Chang's original code
 // (copyright notice below) to fit the display of a modified AIDSvu dataset
-// alter the functionality to meet the AIDSVu project needs, and to update
-// the code from D3 version 2 to D3 version 4.
+// and to alter the functionality to meet the AIDSVu project needs.  In
+// addition, code has been updated to us D3 version 4 (from version 2).
 // Chris Beecroft
 
 // Nutrient Explorer Parallel Coordinates
@@ -26,7 +26,7 @@ var m = [60, 0, 10, 50],
     data_cases,
     data_perc,
     data_rate,
-    range_type = 1,
+    range_type = 1, // 1 = each var, 2 = by variable group,
     g,
     foreground,
     background,
@@ -680,7 +680,7 @@ function brush() {
     // bold dimensions with label
     d3.selectAll('.label')
         .style("font-weight", function(dimension) {
-            if (_.include(actives, dimension)) return "bold";
+            if (_.include(data_filter, dimension)) return "bold";
             return null;
         });
 
@@ -838,23 +838,26 @@ function update_ticks(d, extent) {
         });
 }
 
-// Rescale to new dataset domain
+// Rescale to new dataset domain,  preserving inverted state and brushes
 function rescale() {
-    // reset yscales, preserving inverted state
+    // Save off our brush selections
+    var actives = active_brush_selections();
+
     // Find out the extents of all our data
     var extents = [];
     if (range_type == 3) {
         // get the extents for the selected data
-        var new_data = data_filter();
+        var selected = data_filter();
         dimensions.forEach(function(d, i) {
             if (d != 'Year') {
-                extents[d] = d3.extent(new_data, function(p) { return +p[d]; });
+                extents[d] = d3.extent(selected, function(p) { return +p[d]; });
             } else {
                 extents[d] = d3.extent(data, function(p) { return +p[d]; });
             }
         });
     } else {
         // get the extents for everything
+        var selected = data;
         dimensions.forEach(function(d, i) {
             extents[d] = d3.extent(data, function(p) { return +p[d]; });
         });
@@ -892,34 +895,15 @@ function rescale() {
         }
     });
 
+    // update brush placement
+    for (var i in actives) {
+        var d = actives[i].dimension;
+        d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[0], actives[i].extent[1]].map(yscale[d].scale));
+    }
+
     update_ticks();
-
     // Render selected data
-    paths(data, foreground, brush_count);
-}
-
-// Get polylines within extents
-function actives() {
-    var actives = dimensions.filter(function(p) {
-            return !yscale[p].brush.empty();
-        }),
-        extents = actives.map(function(p) {
-            return yscale[p].brush.extent();
-        });
-
-    // filter extents and excluded states
-    var selected = [];
-    data
-        .filter(function(d) {
-            return !(_.contains(excluded_states, d.State) || _.contains(excluded_years, d.Year));
-        })
-        .map(function(d) {
-            return actives.every(function(p, i) {
-                return extents[i][0] <= d[p] && d[p] <= extents[i][1];
-            }) ? selected.push(d) : null;
-        });
-
-    return selected;
+    // paths(selected, foreground, brush_count);
 }
 
 // scale to window size
@@ -944,9 +928,8 @@ window.onresize = function() {
         .select("g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-    // Removing the selections below, so this is not currently needed
     // get our brush selections before we change any ranges
-    // var actives = active_brush_selections();
+    var actives = active_brush_selections();
 
     xscale = d3.scaleBand().range([0, w], 1).domain(dimensions);
     dimensions.forEach(function(d) {
@@ -962,19 +945,11 @@ window.onresize = function() {
             return "translate(" + xscale(d) + ")";
         })
 
-    // clearing the brushes instead.  The following try block improves the update a bit, but
-    // the chart still becomes a bit unstable and doesn't draw.
-    clear_brushes();
     // update brush placement
-    // for (var i in actives) {
-    //     var d = actives[i].dimension;
-    //     // TODO: Hack, seems to occasionally error out on a negative attribute height on every other call
-    //     try {
-    //          d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[1], actives[i].extent[0]].map(yscale[d].scale));
-    //     }
-    //     catch(e) {
-    //     }
-    // }
+    for (var i in actives) {
+        var d = actives[i].dimension;
+             d3.select(yscale[d].node).call(yscale[d].brush.move, [actives[i].extent[0], actives[i].extent[1]].map(yscale[d].scale));
+    }
 
     brush_count++;
 
@@ -1047,7 +1022,7 @@ d3.selectAll("input[name='range-type']").on("change", function() {
     brush();
 });
 
-// Handle the thiks and ligth/dark buttons
+// Handle the ticks and ligth/dark buttons
 d3.select("#hide-ticks").on("click", hide_ticks);
 d3.select("#show-ticks").on("click", show_ticks);
 d3.select("#dark-theme").on("click", dark_theme);
@@ -1062,7 +1037,7 @@ d3.select("#state-hide").on("click", state_hide);
 d3.select("#year-toggle").on("click", year_toggle);
 d3.select("#year-show").on("click", year_show);
 d3.select("#year-hide").on("click", year_hide);
-d3.select("#update-scale").on("click", scale_update);
+d3.select("#update-scale").on("click", rescale_brush);
 
 function hide_ticks() {
     d3.selectAll(".axis g").style("display", "none");
@@ -1156,7 +1131,8 @@ function year_hide() {
     brush();
 }
 
-function scale_update() {
+// function to help our rescale button
+function rescale_brush() {
     rescale();
     brush();
 }
