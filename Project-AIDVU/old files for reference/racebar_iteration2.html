@@ -26,90 +26,20 @@
                 <p>
                 This visualization was created to gain insights on the yearly and state-wise trends in AIDS infection rates and cases in terms of the key demographic characteristic of Race.
 
-                By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. 
+                By pressing on individual bars we could select the set of states and years by which the rates or the total cases could be aggregated. Please Press the following button to activate filters.
                 </p>
-                <fieldset>
-                <legend class="strong1">Important Instructions</legend>
-                <p>
-                In order to activate filters and view the tables, the following button should be pressed each time the visualization is opened.
-                <br></br>
                 <a class = "btn1" onclick="showrace('black')">Activate Filter</a>
-                <br></br>
-                You could view the selected rows by clicking on the following buttons.
-                <br></br>
-                <a class="btn1" href="#popup1">Rates Table</a>
-                <a class="btn1" href="#popup2">Cases Table</a>
-                <br></br>
+
+                <p>
                 We could choose to see the trends in rates or total cases individually by selecting one of the following buttons. We could also choose to see Both Rates and Total Cases.
-                <br></br>
+                </p>
                 <a class="btn1" onclick="showRate()">Rate</a>
                 <a class="btn1" onclick="showCase()">Total Cases</a>
                 <a class="btn1" onclick="show()">Both</a>
-                </p>
-                </fieldset>
-
-        
-                <div class="dc-data-count">
-                <p>
-                <span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a
-                 href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
-                </p>
-                </div>
 
         </div>
 		<div class="Year">
-	    <center><strong class="strong1">Race-wise Distribution by Year</strong>
-        </center>
-        <div id="popup1" class="overlay"> 
-            <div class="popup">
-                <h2>Table of New Diagnoses by Rates</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                    <table class='table table-hover' id='dc-table-graph1'>
-                        <thead>
-                        <tr class='strong1'>
-                            <th>State</th>
-                            <th>Year</th>
-                            <th>Rates(Blacks)</th>
-                            <th>Rates(Whites)</th>
-                            <th>Rates(Asian)</th>
-                            <th>Rates(Hispanic)</th>
-                            <th>Rates(Amer-Nat.)</th>
-                            <th>Rates(Haw-Native)</th>
-                            <th>Rates(Multi-Race)</th>
-                        </tr>
-                        </thead>
-                    </table>
-      
-                </div>
-            </div>
-        </div>
-
-        <div id="popup2" class="overlay"> 
-            <div class="popup">
-                <h2>Table of New Diagnoses by Cases</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                    <table class='table table-hover' id='dc-table-graph2'>
-                        <thead>
-                        <tr class='strong1'>
-                            <th>State</th>
-                            <th>Year</th>
-                            <th>Cases(Blacks)</th>
-                            <th>Cases(Whites)</th>
-                            <th>Cases(Asian)</th>
-                            <th>Cases(Hispanic)</th>
-                            <th>Cases(Amer-Nat.)</th>
-                            <th>Cases(Haw-Nat.)</th>
-                            <th>Cases(Multi-Race)</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
+	    <strong class="strong1">Race-wise Distribution by Year</strong>
 	    <br></br>
 		<div id="RaceRing">
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
@@ -127,7 +57,7 @@
         </div>
 
         <div class="State">
-        <center><strong class="strong1" >Race-wise Distribution by State</strong></center>
+        <strong class="strong1" >Race-wise Distribution by State</strong>
 
         <div id="RaceStateRate">
         <br></br>
@@ -362,9 +292,6 @@ var hispanicChartCase = dc.barChart("#hispanicCase");
 var americanNativeChartCase = dc.barChart("#americanNativeCase");
 var hawaiianNativeChartCase = dc.barChart("#hawaiianNativeCase");
 var multipleRaceChartCase = dc.barChart("#multipleRaceCase");
-var visCount = dc.dataCount(".dc-data-count");
-var dataTable1 = dc.dataTable("#dc-table-graph1");
-var dataTable2 = dc.dataTable("#dc-table-graph2");
 
 d3.csv("data/AIDSvu_NewDiagnoses.csv", function (err,data){
 
@@ -401,9 +328,6 @@ var multigrpcase = StateDim.group().reduceSum(function (data) { return data.NewD
 var racegrpycase = YearDim.group().reduceSum(function (data) { return (+data.NewDiagBlackCase + +data.NewDiagWhiteCase + +data.NewDiagHispCase + +data.NewDiagAsianCase + +data.NewDiagAmericanNativeCase + +data.NewDiagHawaiianNativeCase + +data.NewDiagMultipleRaceCase);});
 
 
-visCount
-.dimension(ndx)
-.group(all);
 
 blackChart
     .width(1400)
@@ -779,48 +703,6 @@ raceYearChartCase
     .renderVerticalGridLines(true)
     .renderHorizontalGridLines(true);
 
-dataTable1
-    .width(1400)
-    .height(1000)
-    .dimension(YearDim)
-    .group(function(d) { return "List of all cases corresponding to the filters"})
-    .size(500)                           
-    .columns([
-      function(d) { return d["StateAbbrev"]; },
-      function(d) { return d["Year"]; },
-      function(d) { return +d["NewDiagBlackRate"]; },
-      function(d) { return +d["NewDiagWhiteRate"]; },
-      function(d) { return +d["NewDiagAsianRate"]; },
-      function(d) { return +d["NewDiagHispRate"]; },
-      function(d) { return +d["NewDiagAmericanNativeRate"]; },
-      function(d) { return +d["NewDiagHawaiianNativeRate"]; },
-      function(d) { return +d["NewDiagMultipleRaceRate"]; }
-    ])
-    .sortBy(function(d){ return d["StateAbbrev"]; })
-    .order(d3.ascending);
-
- dataTable2
-    .width(1400)
-    .height(1000)
-    .dimension(YearDim)
-    .group(function(d) { return "List of all cases corresponding to the filters"})
-    .size(500)                           
-    .columns([
-      function(d) { return d["StateAbbrev"]; },
-      function(d) { return d["Year"]; },
-      function(d) { return +d["NewDiagBlackCase"]; },
-      function(d) { return +d["NewDiagWhiteCase"]; },
-      function(d) { return +d["NewDiagAsianCase"]; },
-      function(d) { return +d["NewDiagHispCase"]; },
-      function(d) { return +d["NewDiagAmericanNativeCase"]; },
-      function(d) { return +d["NewDiagHawaiianNativeCase"]; },
-      function(d) { return +d["NewDiagMultipleRaceCase"]; }
-    ])
-    .sortBy(function(d){ return d["StateAbbrev"]; })
-    .order(d3.ascending);
-
-
-visCount.render();
 blackChart.render();
 raceYearChart.render();
 blackChartCase.render();
