@@ -12,7 +12,7 @@
 // Released under the BSD License: http://opensource.org/licenses/BSD-3-Clause
 
 var width = document.body.clientWidth,
-    height = d3.max([document.body.clientHeight - 450, 240]);
+    height = d3.max([document.body.clientHeight - 475, 240]);
 
 var m = [60, 0, 10, 50],
     w = width - m[1] - m[3],
@@ -26,6 +26,7 @@ var m = [60, 0, 10, 50],
     data_cases,
     data_perc,
     data_rate,
+    range_type = 1,
     g,
     foreground,
     background,
@@ -308,6 +309,8 @@ function create_scales() {
                     // remove axis if dragged all the way left
                     if (dragging[d] < 12 || dragging[d] > w - 12) {
                         remove_axis(d);
+                        // adjust the scales if we are using common scales
+                        if (range_type > 1) { rescale(); }
                     }
                 }
 
@@ -478,11 +481,15 @@ function create_legend3(dim, brush) {
             // toggle features
             if (_.contains(dimensions, d)) {
                 remove_axis(d);
+                // adjust the scales if we are using common scales
+                if (range_type > 1) { rescale(); }
             } else {
                 dimensions.push(d);
                 xscale.domain(dimensions);
                 update_ticks(); //d, extent);
                 create_scales();
+                // adjust the scales if we are using common scales
+                if (range_type > 1) { rescale(); }
             }
             brush();
         })
@@ -640,18 +647,8 @@ function active_brush_selections() {
     return actives;
 }
 
-// Handles a brush event, toggling the display of foreground lines.
-function brush() {
-    brush_count++;
-
+function data_filter() {
     var actives = active_brush_selections();
-
-    // bold dimensions with label
-    d3.selectAll('.label')
-        .style("font-weight", function(dimension) {
-            if (_.include(actives, dimension)) return "bold";
-            return null;
-        });
 
     // Get lines within extents
     var selected = [];
@@ -673,6 +670,21 @@ function brush() {
                 selected.push(d);
             }
         });
+    return selected;
+}
+
+// Handles a brush event, toggling the display of foreground lines.
+function brush() {
+    brush_count++;
+
+    // bold dimensions with label
+    d3.selectAll('.label')
+        .style("font-weight", function(dimension) {
+            if (_.include(actives, dimension)) return "bold";
+            return null;
+        });
+
+    var selected = data_filter();
 
     if (selected.length < data.length && selected.length > 0) {
         d3.select("#keep-data").attr("disabled", null);
@@ -829,19 +841,54 @@ function update_ticks(d, extent) {
 // Rescale to new dataset domain
 function rescale() {
     // reset yscales, preserving inverted state
+    // Find out the extents of all our data
+    var extents = [];
+    if (range_type == 3) {
+        // get the extents for the selected data
+        var new_data = data_filter();
+        dimensions.forEach(function(d, i) {
+            if (d != 'Year') {
+                extents[d] = d3.extent(new_data, function(p) { return +p[d]; });
+            } else {
+                extents[d] = d3.extent(data, function(p) { return +p[d]; });
+            }
+        });
+    } else {
+        // get the extents for everything
+        dimensions.forEach(function(d, i) {
+            extents[d] = d3.extent(data, function(p) { return +p[d]; });
+        });
+    }
+
+    if (range_type == 1) {
+        // every variable has its own scale
+        dimensions.forEach(function(d, i) {
+            yscale[d].scale = d3.scaleLinear().domain(extents[d]);
+        });
+    } else {
+        // every grouping has a variable that is particular to its group
+        features.forEach(function(d, i) {
+            // only look at columns that are being displayed
+            var min = d3.min(d.list, function(p) { if (_.contains(dimensions, p)) { return extents[p][0]; } });
+            var max = d3.max(d.list, function(p) { if (_.contains(dimensions, p)) { return extents[p][1]; } });
+            d.list.forEach(function(l, i) {
+                if (d.name != 'Year/Total') {
+                    // set all our items to the common group min/max
+                    yscale[l].scale = d3.scaleLinear().domain([min,max]);
+                } else {
+                    // set just one offs
+                    yscale[l].scale = d3.scaleLinear().domain(extents[l]);
+                }
+            })
+        });
+    }
+
+    // update the inverted values
     dimensions.forEach(function(d, i) {
         if (yscale[d].inverted) {
-            yscale[d].scale = d3.scaleLinear()
-                .domain(d3.extent(data, function(p) {
-                    return +p[d];
-                }))
-                .range([0, h]).nice();
+            yscale[d].scale = yscale[d].scale.range([0, h]).nice();
         } else {
-            yscale[d].scale = d3.scaleLinear()
-                .domain(d3.extent(data, function(p) {
-                    return +p[d];
-                }))
-                .range([h, 0]).nice();
+            yscale[d].scale = yscale[d].scale.range([h, 0]).nice();
         }
     });
 
@@ -878,7 +925,7 @@ function actives() {
 // scale to window size
 window.onresize = function() {
     width = document.body.clientWidth;
-    height = d3.max([document.body.clientHeight - 450, 220]);
+    height = d3.max([document.body.clientHeight - 475, 220]);
 
     w = width - m[1] - m[3];
     h = height - m[0] - m[2];
@@ -967,7 +1014,7 @@ function remove_axis(d) {
     brush();
 }
 
-// Appearance toggles
+// Data type toggles
 d3.selectAll("input[name='data-type']").on("change", function() {
     if (this.value == 'rate') {
         data = data_rate;
@@ -984,18 +1031,38 @@ d3.selectAll("input[name='data-type']").on("change", function() {
     brush();
 });
 
+// Scale toggles
+d3.selectAll("input[name='range-type']").on("change", function() {
+    if (this.value == 'variable') {
+        range_type = 1;
+        d3.selectAll("#update-scale").attr("disabled", "disabled");
+    } else if (this.value == 'group') {
+        range_type = 2;
+        d3.selectAll("#update-scale").attr("disabled", "disabled");
+    } else if (this.value == 'group_selected') {
+        range_type = 3;
+        d3.selectAll("#update-scale").attr("disabled", null);
+    }
+    rescale();
+    brush();
+});
+
+// Handle the thiks and ligth/dark buttons
 d3.select("#hide-ticks").on("click", hide_ticks);
 d3.select("#show-ticks").on("click", show_ticks);
 d3.select("#dark-theme").on("click", dark_theme);
 d3.select("#light-theme").on("click", light_theme);
 
+// Handle the state list
 d3.select("#state-toggle").on("click", state_toggle);
 d3.select("#state-show").on("click", state_show);
 d3.select("#state-hide").on("click", state_hide);
 
+// Handle the year list
 d3.select("#year-toggle").on("click", year_toggle);
 d3.select("#year-show").on("click", year_show);
 d3.select("#year-hide").on("click", year_hide);
+d3.select("#update-scale").on("click", scale_update);
 
 function hide_ticks() {
     d3.selectAll(".axis g").style("display", "none");
@@ -1032,6 +1099,7 @@ function state_toggle() {
             excluded_states.push(d);
         }
     }
+    if (range_type == 3) { rescale(); }
     brush();
 }
 
@@ -1041,6 +1109,7 @@ function state_show() {
             excluded_states = _.difference(excluded_states, [d]);
         }
     }
+    if (range_type == 3) { rescale(); }
     brush();
 }
 
@@ -1050,6 +1119,7 @@ function state_hide() {
             excluded_states.push(d);
         }
     }
+    if (range_type == 3) { rescale(); }
     brush();
 }
 
@@ -1062,6 +1132,7 @@ function year_toggle() {
             excluded_years.push(years[d]);
         }
     }
+    if (range_type == 3) { rescale(); }
     brush();
 }
 
@@ -1071,6 +1142,7 @@ function year_show() {
             excluded_years = _.difference(excluded_years, [years[d]]);
         }
     }
+    if (range_type == 3) { rescale(); }
     brush();
 }
 
@@ -1080,5 +1152,11 @@ function year_hide() {
             excluded_years.push(years[d]);
         }
     }
+    if (range_type == 3) { rescale(); }
+    brush();
+}
+
+function scale_update() {
+    rescale();
     brush();
 }

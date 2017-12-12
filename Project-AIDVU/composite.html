@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>AIDSVu State Database Explorer</title>
-    <link rel="stylesheet" type="text/css" href="css/style_min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/parallel.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style_min.css" />
+    <link rel="stylesheet" type="text/css" href="css/parallel.css" />
 </head>
+
 <body>
     <!-- Ramya's title box -->
     <div class="title">
@@ -65,8 +67,7 @@
                     <strong>Reorder Axes</strong>: Drag a heading horizontally.<br/>
                     <strong>Remove Axis</strong>: Drag axis label to the left edge.<br/>
                 </p>
-                <br>
-                    Brushing will select from the selected states and years listed under States/Territories and Years.
+                <br> Brushing will select from the selected states and years listed under States/Territories and Years.
                 <p>
                     Hover over the states to quickly highlight the state data for the selected years.
                 </p>
@@ -92,16 +93,24 @@
             <h3>Years</h3>
             <button id="year-show">Show All</button>
             <button id="year-hide">Hide All</button>
-            <p>
-                <button id="year-toggle">Invert Selection</button>
-                <p id="year-list">
-                </p>
-                <h3>Show Data As</h3>
-                <form action="">
-                    <input type="radio" name="data-type" value="rate" checked="checked"> Rate per 100,000<br>
-                    <input type="radio" name="data-type" value="case"> Number of Cases<br>
-                    <input type="radio" name="data-type" value="perc"> Percent of Total Cases
-                </form>
+            <p> <button id="year-toggle">Invert Selection</button></p>
+            <p id="year-list">
+            </p>
+            <h3>Show Data As</h3>
+            <form action="">
+                <input type="radio" name="data-type" value="rate" checked="checked"> Rate per 100,000<br>
+                <input type="radio" name="data-type" value="case"> Number of Cases<br>
+                <input type="radio" name="data-type" value="perc"> Percent of Total Cases
+            </form>
+            <h3>Set Data Scale By</h3>
+            <form action="" class="settings">
+                <input type="radio" name="range-type" value="variable" checked="checked"> Each Variable<br>
+                <input type="radio" name="range-type" value="group"> Variable Type<br>
+                <input type="radio" name="range-type" value="group_selected"> Var Type By Selected
+            </form>
+            <span class="settings">
+            <p><button id="update-scale" disabled="disabled">Rescale by Selected</button></p>
+            </span>
         </div>
         <div class="fifth">
             <h3>Show Data Columns</h3>
