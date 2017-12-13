@@ -1,6 +1,6 @@
 #
-<h1>Berkeley MIDS w209 Final Project</h1>
-<h2>Ramya Balasubramaniam, Chris Beecroft, Timothy Alt</h2>
+<h1>Berkeley MIDS w209 Final Project<br>
+Ramya Balasubramaniam, Chris Beecroft, Timothy Alt</h1>
 
 <b>Original Proposal</b><br>
 The proposal can be found <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
@@ -16,6 +16,9 @@ The final presentation is in two parts:
   
 <b>Project Website</b><br>
 The project website can be found at <a href="http://people.ischool.berkeley.edu/~timothymalt/w209_final/" target="_blank">http://people.ischool.berkeley.edu/~timothymalt/w209_final/</a>
-  
+
+<b>Data</b><br>
+The finalized data files can be found <a href="https://github.com/timothymalt/w209-final-project/tree/master/Project-AIDVU/data" target="_blank">here</a>.
+
 <b>Final Paper</b><br>
 The final paper can be found <b><u>UPLOAD WHEN FINISHED</u></b>
