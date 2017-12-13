@@ -2,9 +2,20 @@
 <h1>Berkeley MIDS w209 Final Project</h1>
 <h2>Ramya Balasubramaniam, Chris Beecroft, Timothy Alt</h2>
 
-<b>Video</b><br>
-The video is too big to upload to Git, however it can be found <a href="https://ucsf.box.com/s/k7ij8ozmmho2f2v0knwhj7r34kg0a4bo" target="_blank">here</a>.
+<b>Proposal</b><br>
+The proposal can be found <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
 
+<b>Midterm Presentation</b><br>
+The proposal can be found <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
 
-Final Papers (Week 15)
-The final paper will be very brief. You must include the URL for the final version of the project web site and a breakdown of which group members undertook which tasks. Include any additional information you would like your instructor to be aware of, changes you would have made if you had more time, such as information you didn't have time to include in the final presentation or changes you made in the last week, since the in-class demo. Here is a sample final paper.
+<b>Final Presentation</b><br>
+The final presentation is in two parts:
+<ul><li>Part 1 - Presentation detailing user testing, <a href="" target="_blank">here</a>, and </li>
+  <li>Part 2 - Live demonstration of the final visualization at http://people.ischool.berkeley.edu/~timothymalt/w209_final/
+</ul>  
+  
+<b>Project Website</b><br>
+The project website can be found at <a href="http://people.ischool.berkeley.edu/~timothymalt/w209_final/" target="_blank">http://people.ischool.berkeley.edu/~timothymalt/w209_final/</a>. 
+  
+<b>Final Paper</b><br>
+The final paper can be found ...
