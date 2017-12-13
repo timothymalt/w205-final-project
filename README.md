@@ -15,7 +15,7 @@ The final presentation is in two parts:
 </ul>  
   
 <b>Project Website</b><br>
-The project website can be found at <a href="http://people.ischool.berkeley.edu/~timothymalt/w209_final/" target="_blank">http://people.ischool.berkeley.edu/~timothymalt/w209_final/</a>. 
+The project website can be found at <a href="http://people.ischool.berkeley.edu/~timothymalt/w209_final/" target="_blank">http://people.ischool.berkeley.edu/~timothymalt/w209_final/</a>
   
 <b>Final Paper</b><br>
 The final paper can be found ...
