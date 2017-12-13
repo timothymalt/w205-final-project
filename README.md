@@ -2,7 +2,7 @@
 <h1>Berkeley MIDS w209 Final Project</h1>
 <h2>Timothy Alt, Ramya Balasubramaniam, Chris Beecroft</h2>
 
-<b>Video</b>
+<b>Video</b><br>
 The video is too big to upload to Git, however it can be found <a href="https://ucsf.box.com/s/k7ij8ozmmho2f2v0knwhj7r34kg0a4bo" target="_blank">here</a>.
 
 
