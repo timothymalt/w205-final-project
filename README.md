@@ -28,3 +28,8 @@ The finalized data files can be found <a href="https://github.com/timothymalt/w2
 
 <b>Final Paper</b><br>
 The final paper can be found <b><u>UPLOAD WHEN FINISHED</u></b>
+<br>
+<br>
+<br>
+There's even a gif, <a href="https://github.com/timothymalt/w209-final-project/blob/master/presentations/W209.gif" target="_blank">here</a>.
+
