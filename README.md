@@ -12,6 +12,7 @@ The proposal can be found <a href="https://github.com/timothymalt/w209-final-pro
 The final presentation is in two parts:
 <ul><li>Part 1 - Presentation detailing user testing, <b><u>UPLOAD WHEN FINISHED</u></b>
   <li>Part 2 - Live demonstration of the final visualization at http://people.ischool.berkeley.edu/~timothymalt/w209_final/
+    <li>The video can be found here: https://youtu.be/LStbPFcC7Jo</li>
 </ul>  
   
 <b>Project Website</b><br>
