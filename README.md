@@ -20,8 +20,7 @@ The project website can be found at <a href="http://people.ischool.berkeley.edu/
 
 <b>Data</b><br>
 The finalized data files can be found in this repository, <a href="https://github.com/timothymalt/w209-final-project/tree/master/Project-AIDVU/data" target="_blank">here</a>.
-
-The full website files can be found in this repository, in <a href="https://github.com/timothymalt/w209-final-project/tree/master/Project-AIDVU/" target="_blank">this folder</a>.
+<br>The full website files can be found in this repository, in <a href="https://github.com/timothymalt/w209-final-project/tree/master/Project-AIDVU/" target="_blank">this folder</a>.
 
 <b>Final Paper</b><br>
 The final paper can be found in this repository, <a href="https://github.com/timothymalt/w209-final-project/blob/master/final_paper/w209%20final%20paper%20short.pdf" target="_blank">here</a>.
