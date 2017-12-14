@@ -11,7 +11,7 @@ The mid-term progress presentation can be found  in this repository, <a href="ht
 <b>Final Presentation</b><br>
 The final presentation is in two parts:
 <ul><li>Part 1 - Presentation detailing user testing can be found in this repository, <a href="https://github.com/timothymalt/w209-final-project/blob/master/presentations/w209%20-%20Final%20Presentation.pdf" target="_blank">here</a>.
-  <li>Part 2 - Live demonstration of the final visualization at http://people.ischool.berkeley.edu/~timothymalt/w209_final/
+  <li>Part 2 - Live visualization at: http://people.ischool.berkeley.edu/~timothymalt/w209_final/
     <li>The video can be found here: https://youtu.be/LStbPFcC7Jo</li>
 </ul>  
   
