@@ -3,7 +3,7 @@
 Ramya Balasubramaniam, Chris Beecroft, Timothy Alt</h1>
 
 <b>Original Proposal</b><br>
-The proposal can be found  in this repository,<a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
+The proposal can be found in this repository, <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
 
 <b>Midterm Presentation</b><br>
 The proposal can be found  in this repository, <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
