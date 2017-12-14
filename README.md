@@ -8,9 +8,14 @@ The proposal can be found <a href="https://github.com/timothymalt/w209-final-pro
 <b>Midterm Presentation</b><br>
 The proposal can be found <a href="https://github.com/timothymalt/w209-final-project/blob/master/proposal/W209%20-%20Final%20Project%20Proposal%2C%20Chris%2C%20Ramya%20and%20Tim.pdf" target="_blank">here</a>.
 
+
+
+
+
+
 <b>Final Presentation</b><br>
 The final presentation is in two parts:
-<ul><li>Part 1 - Presentation detailing user testing, <b><u>UPLOAD WHEN FINISHED</u></b>
+<ul><li>Part 1 - Presentation detailing user testing, a href="https://github.com/timothymalt/w209-final-project/blob/master/presentations/w209%20-%20Final%20Presentation.pdf" target="_blank">here</a>.
   <li>Part 2 - Live demonstration of the final visualization at http://people.ischool.berkeley.edu/~timothymalt/w209_final/
     <li>The video can be found here: https://youtu.be/LStbPFcC7Jo</li>
 </ul>  
